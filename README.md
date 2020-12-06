@@ -28,7 +28,7 @@ The first step to translate VAs is to break the VA into ```s```, ```p```, ```w``
 #### Demand Paging
 If the size of the VM exceeds the size of the PM, then not all pages can be present in PM at all times, but must be loaded from a disk as needed. When a nonresident page is needed and no free frame is available, one of the resident pages must be removed and replaced by the new page. Thus, the PT of a given segment may not be resident when a VA is being translated.
  
-To keep track of which pages of a segment s are currently resident, an additional bit, called the present bit (sometimes called the resident bit), is associated with each entry in the PT. Similarly, each entry of an ST contains a present bit to record the presence or absence of the corresponding PT. If the present bit is true, then the entry contains the frame number of the page or PT. If the present bit is false, then the entry contains the location of the page or PT on the disk.
+To keep track of which pages of a segment s are currently resident, an additional bit, called the present bit, is associated with each entry in the PT. Similarly, each entry of an ST contains a present bit to record the presence or absence of the corresponding PT. If the present bit is true, then the entry contains the frame number of the page or PT. If the present bit is false, then the entry contains the location of the page or PT on the disk.
  
 Referencing a nonresident page or PT is called a page fault, which the memory manager must resolve by locating the missing page or PT on the disk, allocating a page frame, and loading the missing page or PT into the frame
 
