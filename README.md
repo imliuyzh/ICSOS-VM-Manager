@@ -16,11 +16,11 @@ Each VA is divided into 2 components, ```(p, w)```, where ```p``` is the page nu
 To gain the advantages of both approaches, segmentation can be combined with paging in that each segment is divided into fixed-size pages, which do not have to be contiguous in PM. Each entry of the ST points to a PT corresponding to one segment, and each entry of the PT points to one page comprising the address space of the process. Each VA is then divided into 3 components, ```(s, p, w)```, where ```s``` is the segment number (offset into the segment table), ```p``` is the page number (offset into the PT), and ```w``` is the offset within the page.
 
 ### Address Translation
-A VA is a nonnegative integer. The number of bits used to represent the VA determines the size of the VA space. For example, with a VA of 32 bits, ```2^32``` addresses can be created. The number of bits used to represent ```s```, ```p```, and ```w``` determines the size of the segment table, the PT, and each page, respectively.
+A VA is a nonnegative integer. The number of bits used to represent the VA determines the size of the VA space. For example, with a VA of 32 bits, ```2^32``` addresses can be created. The number of bits used to represent ```s```, ```p```, ```w```, and ```pw``` determines the size of the segment table, the PT, each page, and the offset into the segment respectively.
  
 A PA is also a nonnegative integer and the number of bits used to represent the PA determines the size of the PM.
  
-The first step to translate VAs is to break the VA into ```s```, ```p```, ```w```, and ```pw``` each becomes a separate integer. The segment number ```s``` is used as an offset into the ST to find the corresponding PT. The page number ```p``` is used as an offset into the PT to find the corresponding page. The offset ```w``` is added to the starting address of the page to form the PA. ```pw``` is the offset into the segment s and must not exceed the segment size.
+The first step to translate VAs is to break the VA into ```s```, ```p```, ```w```, and ```pw```, each becomes a separate integer. The segment number ```s``` is used as an offset into the ST to find the corresponding PT. The page number ```p``` is used as an offset into the PT to find the corresponding page. The offset ```w``` is added to the starting address of the page to form the PA. ```pw``` is the offset into the segment s and must not exceed the segment size.
 
 <img src="https://i.ibb.co/jwx3WSH/vmtlb1v2-1.png" width=500 />
 
