@@ -24,7 +24,7 @@ The first step to translate VAs is to break the VA into ```s```, ```p```, and ``
  
 As illustrated by the following diagram, the segment number ```s``` is used as an offset into the ST to find the corresponding PT. The page number ```p``` is used as an offset into the PT to find the corresponding page. The offset ```w``` is added to the starting address of the page to form the PA.
 
-<img src="https://ibb.co/2MLcsT5" />
+<img src="https://i.ibb.co/jwx3WSH/vmtlb1v2-1.png" width=500 />
 
 ### VM with Demand Paging
 #### Demand Paging
