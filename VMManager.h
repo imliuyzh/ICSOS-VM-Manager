@@ -45,13 +45,13 @@ private:
      * Initialize the segment tables according to the first line of the init file.
      * @param segmentLine the first line of the init file
      */
-    void initST(std::string segmentLine);
+    void initST(std::string& segmentLine);
     
     /**
      * Initialize the page tables according to the second line of the init file.
      * @param pageLine the second line of the init file
      */
-    void initPT(std::string pageLine);
+    void initPT(std::string& pageLine);
     
     /**
      * Copy an entire block from paging disk d[b] into the physical memory starting at pm[m].

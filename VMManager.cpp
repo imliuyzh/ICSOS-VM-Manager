@@ -65,7 +65,7 @@ void VMManager::fillFreeFrames()
     }
 }
 
-void VMManager::initST(std::string segmentLine)
+void VMManager::initST(std::string& segmentLine)
 {
     int si = 0, zi = 0, fi = 0;		// PT of segment si resides in frame fi. and the length of segment si is zi
     std::stringstream segmentLineStream(segmentLine);
@@ -81,7 +81,7 @@ void VMManager::initST(std::string segmentLine)
     }
 }
 
-void VMManager::initPT(std::string pageLine)
+void VMManager::initPT(std::string& pageLine)
 {
     int sj = 0, pj = 0, fj = 0;		// the page pj of segment sj resides in frame fj
     std::stringstream pageLineStream(pageLine);
