@@ -5,7 +5,7 @@
 #include <string>
 
 /**
- * A class for managing the paging disk and both physical and virtual memory.
+ * A class for managing for both the physical and virtual memory.
  */
 class VMManager
 {
@@ -65,7 +65,7 @@ private:
     int translateVMAddress(int address);
     
 private:
-    // Physical memory of 524288 bytes
+    // Physical memory of 1024 frames of 512 bits
     int* pm;
     
     // A paging disk

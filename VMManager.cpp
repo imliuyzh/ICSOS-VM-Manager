@@ -127,16 +127,15 @@ void VMManager::readBlock(int b, int m)
  * 3. Adding the page number p to the starting address of the PT yields the PT entry of page p: PM[2s+1]*512+p
  * 4. PM[PM[2s+1]*512+p] then contains the frame number, fj, of the corresponding page p.
  * 		If PM[PM[2s + 1]*512 + p] < 0
- * 		Allocate free frame f2 using list of free frames
- * 		Update list of free frames
- * 		Read disk block b = |PM[PM[2s + 1]*512 + p]| into PM staring at location f2*512
- * 		PM[PM[2s + 1]*512 + p] = f2
+ * 			Allocate free frame f2 using list of free frames
+ * 			Update list of free frames
+ * 			Read disk block b = |PM[PM[2s + 1]*512 + p]| into PM staring at location f2*512
+ * 			PM[PM[2s + 1]*512 + p] = f2
  * 5. To find the starting address of page p, the frame number is again multiplied by the frame size: PM[PM[2s+1]*512+p]*512. 
  * Adding the offset w to the starting address of page p yields the final PA: PM[PM[2s+1]*512+p]*512+w.
  */
 int VMManager::translateVMAddress(int address)
 {
-    // pw is the offset into the segment s and must not exceed the segment size
     int s = address >> 18, w = address & 0x1FF, p = (address >> 9) & 0x1FF, pw = address & 0x3FFFF;
     if (pw >= pm[2 * s])	// VA is outside of the segment boundary
     {
