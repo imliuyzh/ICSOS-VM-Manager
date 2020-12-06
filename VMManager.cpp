@@ -1,3 +1,4 @@
+// Please read the comments in the header file to understand each method.
 #include "VMManager.h"
 
 VMManager::VMManager(char* initFile)
@@ -114,15 +115,35 @@ void VMManager::readBlock(int b, int m)
     }
 }
 
+/*
+ * 1. PM[2s] refers to the size field of segment s and PM[2s+1] refers to the frame number, fi, of the PT of segment s.
+ * 		If pw ≥ PM[2s], then return -1 (error)
+ * 		If PM[2s + 1] < 0, then
+ * 			Allocate free frame f1 using list of free frames
+ * 			Update list of free frames
+ * 			Read disk block b = |PM[2s + 1]| into PM staring at location f1*512
+ * 			PM[2s + 1] = f1
+ * 2. To find the starting address of the PT, the frame number is multiplied by the frame size: PM[2s+1]*512
+ * 3. Adding the page number p to the starting address of the PT yields the PT entry of page p: PM[2s+1]*512+p
+ * 4. PM[PM[2s+1]*512+p] then contains the frame number, fj, of the corresponding page p.
+ * 		If PM[PM[2s + 1]*512 + p] < 0
+ * 		Allocate free frame f2 using list of free frames
+ * 		Update list of free frames
+ * 		Read disk block b = |PM[PM[2s + 1]*512 + p]| into PM staring at location f2*512
+ * 		PM[PM[2s + 1]*512 + p] = f2
+ * 5. To find the starting address of page p, the frame number is again multiplied by the frame size: PM[PM[2s+1]*512+p]*512. 
+ * Adding the offset w to the starting address of page p yields the final PA: PM[PM[2s+1]*512+p]*512+w.
+ */
 int VMManager::translateVMAddress(int address)
 {
+    // pw is the offset into the segment s and must not exceed the segment size
     int s = address >> 18, w = address & 0x1FF, p = (address >> 9) & 0x1FF, pw = address & 0x3FFFF;
-    if (pw >= pm[2 * s])
+    if (pw >= pm[2 * s])	// VA is outside of the segment boundary
     {
         return -1;
     }
     
-    if (pm[(2 * s) + 1] < 0)
+    if (pm[(2 * s) + 1] < 0)	// page fault: PT is not resident
     {
         int f1 = freeFrames.front();
         freeFrames.pop_front();
@@ -130,7 +151,7 @@ int VMManager::translateVMAddress(int address)
         pm[(2 * s) + 1] = f1;
     }
 
-    if (pm[(pm[(2 * s) + 1] * 512) + p] < 0)
+    if (pm[(pm[(2 * s) + 1] * 512) + p] < 0)	// page fault: page is not resident
     {
         int f2 = freeFrames.front();
         freeFrames.pop_front();
