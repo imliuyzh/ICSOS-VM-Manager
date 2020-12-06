@@ -20,9 +20,7 @@ A VA is a nonnegative integer. The number of bits used to represent the VA deter
  
 A PA is also a nonnegative integer and the number of bits used to represent the PA determines the size of the PM.
  
-The first step to translate VAs is to break the VA into ```s```, ```p```, and ```w```, each becomes a separate integer.
- 
-As illustrated by the following diagram, the segment number ```s``` is used as an offset into the ST to find the corresponding PT. The page number ```p``` is used as an offset into the PT to find the corresponding page. The offset ```w``` is added to the starting address of the page to form the PA.
+The first step to translate VAs is to break the VA into ```s```, ```p```, ```w```, and ```pw``` each becomes a separate integer. The segment number ```s``` is used as an offset into the ST to find the corresponding PT. The page number ```p``` is used as an offset into the PT to find the corresponding page. The offset ```w``` is added to the starting address of the page to form the PA. ```pw``` is the offset into the segment s and must not exceed the segment size.
 
 <img src="https://i.ibb.co/jwx3WSH/vmtlb1v2-1.png" width=500 />
 
