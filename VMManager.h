@@ -1,3 +1,6 @@
+#ifndef VM_MANAGER_H
+#define VM_MANAGER_H
+
 #include <cmath>
 #include <fstream>
 #include <list>
@@ -74,3 +77,5 @@ private:
     // A linked list of free frames
     std::list<int> freeFrames;
 };
+
+#endif
