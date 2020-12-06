@@ -16,9 +16,7 @@ private:
     void fillFreeFrames();
     void initST(std::string segmentLine);
     void initPT(std::string pageLine);
-    void init(char* initFile);
     void readBlock(int b, int m);
-    void writeBlock(int b, int m);
     int translateVMAddress(int address);
     
 private:

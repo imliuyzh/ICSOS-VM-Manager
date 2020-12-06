@@ -3,7 +3,17 @@
 VMManager::VMManager(char* initFile)
     : pm{new int[524288]}, d{new int*[1024]}
 {
-    init(initFile);
+    std::fstream initFileStream{initFile, std::ios::in};
+    std::string segmentLine = "", pageLine = "";
+    std::getline(initFileStream, segmentLine);
+    std::getline(initFileStream, pageLine);
+    initFileStream.close();
+    
+    fillZero();
+    fillFreeFrames();
+
+    initST(segmentLine);
+    initPT(pageLine);
 }
 
 void VMManager::start(char* inputFile)
@@ -94,37 +104,12 @@ void VMManager::initPT(std::string pageLine)
     }
 }
 
-void VMManager::init(char* initFile)
-{
-    std::fstream initFileStream{initFile, std::ios::in};
-    std::string segmentLine = "", pageLine = "";
-    std::getline(initFileStream, segmentLine);
-    std::getline(initFileStream, pageLine);
-    initFileStream.close();
-    
-    fillZero();
-    fillFreeFrames();
-
-    initST(segmentLine);
-    initPT(pageLine);
-}
-
 void VMManager::readBlock(int b, int m)
 {
     int pmIndex = m;
     for (int counter = 0; counter < 512; ++counter)
     {
         pm[pmIndex] = d[b][counter];
-        ++pmIndex;
-    }
-}
-
-void VMManager::writeBlock(int b, int m)
-{
-    int pmIndex = m;
-    for (int counter = 0; counter < 512; ++counter)
-    {
-        d[b][counter] = pm[pmIndex];
         ++pmIndex;
     }
 }
