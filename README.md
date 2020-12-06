@@ -57,12 +57,12 @@ Since blocks may need to be moved to the PM from the paging disk, the memory man
 + The sign bit in each ST or PT entry represents the present bit
 
 #### PM Specification
-+ PM is represented as an array of 524,288 integers.
-    + Divided into 1024 frames of 512 words each. Consequently, the size of a PA is 19 bits.
-+ Each entry of the ST requires 2 integers. Thus, the ST needs 2 frames and resides always in frames 0 and 1.
++ PM is represented as an array of 524,288 integers
+    + Divided into 1024 frames of 512 words each. Consequently, the size of a PA is 19 bits
++ Each entry of the ST requires 2 integers. Thus, the ST needs 2 frames and resides always in frames 0 and 1
 
 ## Running the Application
-This program will take an init and input file and display several translated physical addresses in a file named output-dp.txt. Examples of the init and input file are provided below.
+This program will take an init and input file and display several translated physical addresses in a file named ```output-dp.txt```.
 
 ### Built With
 Please install these applications if you want to compile the program yourself:
