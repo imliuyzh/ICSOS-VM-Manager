@@ -30,7 +30,7 @@
 *.exe
 *.out
 *.app
-icsospm
+icsosvm
 
 # Core dump files
 core.*
