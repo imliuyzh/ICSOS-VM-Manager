@@ -30,3 +30,19 @@
 *.exe
 *.out
 *.app
+icsospm
+
+# Core dump files
+core.*
+vgcore.*
+
+# VS Code files
+.vscode
+
+# Test case files
+init*
+input*
+output*
+
+# README for grading
+README.txt
