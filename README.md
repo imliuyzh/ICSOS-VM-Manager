@@ -86,9 +86,9 @@ s_1 z_1 f_1 s_2 z_2 f_2 … s_n z_n f_n
 s_1 p_1 f_1 s_2 p_2 f_2 … s_m p_m f_m
 ```
 
-Each triple ```s_i z_i f_i``` on line 1 means that PT of segment si resides in frame ```f_i```. and the length of segment ```s_i``` is ```z_i```. Thus, line 1 defines the ST. For example, ```8 4000 3``` means that the PT of segment 8 resides in frame 3 and the size of segment 8 is 4000. That is, the initialization sets ```PM[2*8] = PM[16] = 4000``` and ```PM[2*8+1] = PM[17] = 3```.
+Each triple ```s_i z_i f_i``` on line 1 means that PT of segment ```s_i``` resides in frame ```f_i```, and the length of segment ```s_i``` is ```z_i```. Thus, line 1 defines the ST. For example, ```8 4000 3``` means that the PT of segment 8 resides in frame 3 and the size of segment 8 is 4000.
  
-Each triple ```s_j p_j f_j``` on line 2 means that the page ```p_j``` of segment ```s_j``` resides in frame ```f_j```. Thus, line 2 defines the PTs. For example, ```8 5 8``` means that page 5 of segment 8 resides in frame 8. That is, the initialization sets ```PM[PM[2*8+1]*512+5] = 8```.
+Each triple ```s_j p_j f_j``` on line 2 means that the page ```p_j``` of segment ```s_j``` resides in frame ```f_j```. Thus, line 2 defines the PTs. For example, ```8 5 8``` means that page 5 of segment 8 resides in frame 8.
 
 Beware that the third component of each triple can be a positive or a negative integer. A positive integer, ```f_i```, means that the corresponding PT or page resides in frame ```f_i```. A negative integer, ```−b_i```, means that the corresponding PT or page is currently not resident and must be loaded into a free frame from block ```b_i``` of the disk.
 
