@@ -33,7 +33,7 @@ To keep track of which pages of a segment s are currently resident, an additiona
 Referencing a nonresident page or PT is called a page fault, which the memory manager must resolve by locating the missing page or PT on the disk, allocating a page frame, and loading the missing page or PT into the frame
 
 ##### A Paging Disk
-The paging disk is emulated as a two-dimensional integer array, ```D[B][512]```, where ```B``` is the number of blocks and 512 is the block size (equal to the page size). The disk may only be accessed one block at a time. The function ```readBlock(b, m)``` copies the entire block ```D[b]``` into the PM frame starting at location ```PM[m]```. For this project, the paging disk is an integer array ```D[1024][512]```.
+The paging disk is emulated as a two-dimensional integer array, ```D[B][512]```, where ```B``` is the number of blocks and 512 is the block size (equal to the page size). The disk may only be accessed one block at a time. For this project, the paging disk is an integer array ```D[1024][512]```.
 
 ##### List of Free Frames
 Since blocks may need to be moved to the PM from the paging disk, the memory manager must use a linked list to keep track of which memory frames are free. In addition, assume the PM will always have a sufficient number of free frames available so that no page replacement algorithm is needed.
